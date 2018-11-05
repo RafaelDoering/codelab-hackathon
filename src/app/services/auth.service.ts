@@ -7,18 +7,19 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
+  backendURL: string;
   logged: boolean;
   loggedUserName: string;
   loggedUserIsAdmin: boolean;
 
   signup(name: string, email: string, password: string) {
-    return this.http.post('url', {}).pipe(
+    return this.http.post(`${this.backendURL}/signup`, {name, email, password}).pipe(
       map((res) => this.setSession(res))
     );
   }
 
   login(email: string, password: string) {
-    return this.http.post('url', {}).pipe(
+    return this.http.post(`${this.backendURL}/login`, {email, password}).pipe(
       map((res) => this.setSession(res))
     );
   }
