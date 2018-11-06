@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { AuthService } from './../../../services/auth.service';
+import { ProductService } from './../../../services/product.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-product',
@@ -15,8 +16,10 @@ export class AddProductComponent {
   });
 
   onSubmit() {
-    console.log(this.addProductForm.value);
+    this.productService.add(this.addProductForm.value.name, this.addProductForm.value.description).subscribe(() => {
+      this.router.navigateByUrl('/');
+    });
   }
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private productService: ProductService, private router: Router) { }
 }

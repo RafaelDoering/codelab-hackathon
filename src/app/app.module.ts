@@ -11,7 +11,6 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { NavbarComponent } from './partials/navbar/navbar.component';
 import { ProductComponent } from './pages/products/product/product.component';
 import { AddProductComponent } from './pages/products/add-product/add-product.component';
-import { ListProductsComponent } from './pages/products/list-products/list-products.component';
 
 @NgModule({
   declarations: [
@@ -21,8 +20,7 @@ import { ListProductsComponent } from './pages/products/list-products/list-produ
     SignupComponent,
     NavbarComponent,
     ProductComponent,
-    AddProductComponent,
-    ListProductsComponent
+    AddProductComponent
   ],
   imports: [
     BrowserModule,

@@ -1,26 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
 import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  backendURL: string;
+  backendURL = 'http://localhost:3000/auth/';
   logged: boolean;
   loggedUserName: string;
   loggedUserIsAdmin: boolean;
 
   signup(name: string, email: string, password: string) {
-    return this.http.post(`${this.backendURL}/signup`, {name, email, password}).pipe(
-      map((res) => this.setSession(res))
+    return this.httpClient.post(`${this.backendURL}signup`, {name, email, password}).pipe(
+      map(res => this.setSession(res))
     );
   }
 
   login(email: string, password: string) {
-    return this.http.post(`${this.backendURL}/login`, {email, password}).pipe(
-      map((res) => this.setSession(res))
+    return this.httpClient.post(`${this.backendURL}login`, {email, password}).pipe(
+      map(res => this.setSession(res))
     );
   }
 
@@ -40,5 +39,5 @@ export class AuthService {
     this.loggedUserIsAdmin = false;
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { AuthService } from './../../services/auth.service';
 
@@ -15,8 +16,10 @@ export class LoginComponent {
   });
 
   onSubmit() {
-    this.authService.login(this.loginForm.value.email, this.loginForm.value.password);
+    this.authService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe(() => {
+      this.router.navigateByUrl('/');
+    });
   }
 
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
 }

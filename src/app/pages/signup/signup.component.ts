@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { AuthService } from './../../services/auth.service';
 
@@ -16,8 +17,10 @@ export class SignupComponent {
   });
 
   onSubmit() {
-    this.authService.signup(this.signupForm.value.name, this.signupForm.value.email, this.signupForm.value.password);
+    this.authService.signup(this.signupForm.value.name, this.signupForm.value.email, this.signupForm.value.password).subscribe(() => {
+      this.router.navigateByUrl('/');
+    });
   }
 
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
 }

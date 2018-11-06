@@ -1,26 +1,27 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  backendURL: string;
+  backendURL = 'http://localhost:3000/';
 
-  get(productId: number) {
-    return this.http.get(`${this.backendURL}/product/${productId}`);
+  get(productId: number): Observable<any[]>  {
+    return this.http.get<any[]>(`${this.backendURL}product/${productId}`);
   }
 
-  add(name: string, description: string) {
-    return this.http.post(`${this.backendURL}/product`, {name, description});
+  add(name: string, description: string): Observable<any[]>  {
+    return this.http.post<any[]>(`${this.backendURL}product`, {name, description});
   }
 
-  delete(productId: number) {
-    return this.http.delete(`${this.backendURL}/product/${productId}`);
+  delete(productId: number): Observable<any[]>  {
+    return this.http.delete<any[]>(`${this.backendURL}product/${productId}`);
   }
 
-  list() {
-    return this.http.get(`${this.backendURL}/products`);
+  list(): Observable<any[]>  {
+    return this.http.get<any[]>(`${this.backendURL}product`);
   }
 
   constructor(private http: HttpClient) { }
